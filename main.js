@@ -82,10 +82,27 @@ const names = function(todos) {
 
   return map(todos, getTodoName)
 }
-
 const namesAndPriorities = function(todos) {
+  newArr = [];
+  todos.forEach(function(todos){
+  if(todos.priority=== 2) {
+  newArr.push(todos.text + ' - High')
+
+  } else {
+    newArr.push(todos.text + ' - Low')
   
 }
+})
+return newArr
+}
+
+
+
+
+
+
+
+
 
 const isNotComplete = function(todos) {
   return getCompleteness(todos) === false
