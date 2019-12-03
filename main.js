@@ -12,42 +12,64 @@ They'll also become easier later once you've written a few of the iteration func
 
 */
 
-const map = function() {
-
+const map = function(arr , func) {
+  const newArr = [];
+  arr.forEach(function(arr){
+    newArr.push(func(arr))
+    });
+  return newArr;
 }
 
-const filter = function() {
+const filter = function(arr, func) {
+  const newArr = [];
+  arr.forEach(function(arr){
+    if (func(arr) === true){
+    newArr.push(arr)
+    }
 
+    })
+    
+    return newArr;
 }
 
-const twoPileSort = function() {
-  
-}
+const twoPileSort = function(arr, func) {
+  const newArr = [];
+  console.log(arr)
+  arr.forEach(function(arr){
+    if (func(arr) === true){
+    newArr.unshift(arr)
+    } else {
+    newArr.push(arr)
+    }
 
+    })
+    
+    return newArr;
 
+  }
 
 /********************
  * HELPER FUNCTIONS *
  ********************/
 
-const getTodoName = function() {
-
+const getTodoName = function(todos) {
+  return todos.text
 }
 
-const getCompleteness = function () {
-  
+const getCompleteness = function (todos) {
+  return todos.complete
 }
 
-const getPriority = function () {
-  
+const getPriority = function (todos) {
+  return todos.priority
 }
 
-const isComplete = function() {
-  
+const isComplete = function(todos) {
+  return getCompleteness(todos)
 }
 
-const isHighPriority = function() {
-  
+const isHighPriority = function(todos) {
+  return getPriority(todos) === 2
 }
 
 
@@ -56,36 +78,42 @@ const isHighPriority = function() {
  * ITERATION FUNCTIONS *
  ***********************/
 
-const names = function() {
+const names = function(todos) {
 
+  return map(todos, getTodoName)
 }
 
-const namesAndPriorities = function() {
+const namesAndPriorities = function(todos) {
   
 }
 
-const justNotComplete = function() {
-  
+const isNotComplete = function(todos) {
+  return getCompleteness(todos) === false
+}
+const justNotComplete = function(todos) {
+  return filter(todos,isNotComplete)
 }
 
-const justComplete = function() {
-  
+const justComplete = function(todos) {
+  return filter(todos,isComplete)
 }
 
-const priority2Only = function() {
-  
+const priority2Only = function(todos) {
+  return filter(todos,isHighPriority)
+}
+const isLowPriority = function(todos) {
+  return getPriority(todos) === 1
+}
+const priority1Only = function(todos) {
+  return filter(todos,isLowPriority)
 }
 
-const priority1Only = function() {
-  
+const notCompleteFirst = function(todos) {
+  return twoPileSort(todos,isNotComplete)
 }
 
-const notCompleteFirst = function() {
-  
-}
-
-const priority2First = function() {
-  
+const priority2First = function(todos) {
+  return twoPileSort(todos,isHighPriority)
 }
 
 
